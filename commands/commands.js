@@ -9,6 +9,7 @@
     require('./upvote'),
     require('./downvote'),
     require('./rating'),
-    require('./help')
+    require('./help'),
+    require('./pedeAe')
   ];
 })();

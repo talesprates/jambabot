@@ -6,7 +6,7 @@ const commands = require('./commands');
     commands.some((command) => {
       let match;
 
-      if (command.acceptsPreFormattedText) {
+      if (command.acceptsPreFormattedText && message.preFormattedText) {
         match = message.preFormattedText.match(command.pattern);
       }
 

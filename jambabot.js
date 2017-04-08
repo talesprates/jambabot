@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-
 const Botkit = require('botkit');
 
 const variables = require('./variables');
@@ -9,16 +8,34 @@ const parseCommand = require('./commands/parseCommand');
 (() => {
   const app = express();
 
+  const BotController = Botkit.slackbot({
+    debug: false
+  });
+
+  const bot = BotController.spawn({
+    token: variables.JAMBABOT_USER_TOKEN,
+  });
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.text());
 
   app.post('/trigger', (slackRequest, slackResponse) => {
-    const token = slackRequest.body.token;
-    if (token === variables.JAMBABOT_DEBUG_TOKEN || token === variables.JAMBABOT_PROD_TOKEN) {
+    const postData = slackRequest.body;
+
+    if (!isValidToken(postData.token)) {
+      console.info('Invalid token: ', postData.token);
+      slackResponse.status(403).send();
+      return;
+    }
+
+    bot.api.users.info({ user: postData.user_name }, (error, usersInfoResponse) => {
+      const user = usersInfoResponse.user;
       const message = {
-        userName: slackRequest.body.user_name,
-        userText: slackRequest.body.text.substr(slackRequest.body.trigger_word.length).replace(/\s+/g, ' ').trim()
+        userName: user.name,
+        firstName: user.profile.first_name,
+        lastName: user.profile.last_name,
+        userText: postData.text.substr(slackRequest.body.trigger_word.length).replace(/\s+/g, ' ').trim()
       };
 
       parseCommand(message, (response) => {
@@ -29,9 +46,7 @@ const parseCommand = require('./commands/parseCommand');
 
         slackResponse.send(`{"text": ${JSON.stringify(response)}}`);
       });
-    } else {
-      slackResponse.status(403).send();
-    }
+    });
   });
 
   app.listen(6001, () => {
@@ -39,13 +54,11 @@ const parseCommand = require('./commands/parseCommand');
     console.info(`variables: ${JSON.stringify(variables)}`);
   });
 
-  const controller = Botkit.slackbot({
-    debug: false
-  });
 
-  const bot = controller.spawn({
-    token: variables.JAMBABOT_USER_TOKEN,
-  });
+  function isValidToken(token) {
+    return token === variables.JAMBABOT_DEBUG_TOKEN || token === variables.JAMBABOT_PROD_TOKEN;
+  }
+
 
   function startRTM() {
     bot.startRTM((error) => {
@@ -58,15 +71,15 @@ const parseCommand = require('./commands/parseCommand');
     });
   }
 
-  controller.on('rtm_close', startRTM);
+  BotController.on('rtm_close', startRTM);
 
   startRTM();
 
-  controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], (botInstance, botMessage) => {
+  BotController.hears('.*', ['direct_message', 'direct_mention', 'mention'], (botInstance, botMessage) => {
     const api = botInstance.api;
 
     api.users.info({ user: botMessage.user }, (error, usersInfoResponse) => {
-      const userName = usersInfoResponse.user.name;
+      const user = usersInfoResponse.user;
 
       api.channels.info({ channel: botMessage.channel }, (errorChannels, channelsInfoResponse) => {
         api.groups.info({ channel: botMessage.channel }, (errorGroups, groupsInfoResponse) => {
@@ -84,7 +97,9 @@ const parseCommand = require('./commands/parseCommand');
 
           const message = {
             channel,
-            userName,
+            userName: user.name,
+            firstName: user.profile.first_name,
+            lastName: user.profile.last_name,
             userText: botMessage.text.replace(/\s+/g, ' ').trim(),
             preFormattedText: botMessage.text
           };

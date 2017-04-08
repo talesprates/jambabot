@@ -7,13 +7,19 @@ const mongoose = require('mongoose');
   const Dish = mongoose.model('Dish', DishSchema);
 
   function isValidDish(dish, callback) {
-    Dish.findOne({ dish: dish.toLowerCase() }, (error, dishFound) => {
-      if (error) {
-        callback(error, undefined);
-        return;
-      }
+    const validCallback = callback || function noop() {};
 
-      callback(null, !!dishFound);
+    return new Promise((resolve, reject) => {
+      Dish.findOne({ dish: dish.toLowerCase() }, (error, dishFound) => {
+        if (error) {
+          validCallback(error, undefined);
+          reject(error);
+          return;
+        }
+
+        validCallback(null, !!dishFound);
+        resolve(!!dishFound);
+      });
     });
   }
 

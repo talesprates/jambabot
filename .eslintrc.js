@@ -12,7 +12,8 @@ module.exports = {
   "globals": {
     "sinon": true,
     "inject": true,
-    "should": true
+    "should": true,
+    "waitElementVisible": true
   },
 
   "parserOptions": {
