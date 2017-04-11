@@ -13,7 +13,7 @@ const parseCommand = require('./commands/parseCommand');
   });
 
   const bot = BotController.spawn({
-    token: variables.JAMBABOT_USER_TOKEN,
+    token: variables.JAMBABOT_USER_TOKEN
   });
 
   app.use(bodyParser.json());
@@ -104,7 +104,7 @@ const parseCommand = require('./commands/parseCommand');
             preFormattedText: botMessage.text
           };
 
-          console.debug(message);
+          //console.debug(message);
 
           parseCommand(message, (response) => {
             if (response) {

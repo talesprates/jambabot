@@ -21,12 +21,12 @@ fdescribe('Test Function', () => {
   it('Function created in order to do protractor related tests', () => {
     const ls = spawn('ls', ['-l']);
     ls.stdout.on('data', (data) => {
-      console.log(`${data}rf`);
+      console.log(`${data} rf`);
     });
 
-    const ls2 = spawn('ls', ['-l', '--author']);
+    /*const ls2 = spawn('ls', ['-l', '--author']);
     ls2.stdout.on('data', (data) => {
-      console.log(`${data}rf`);
-    });
+      console.log(`${data} rf`);
+    });*/
   });
 });

@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
   const Dish = mongoose.model('Dish', DishSchema);
 
   function isValidDish(dish, callback) {
+	  
+    console.log('valid dish');	  
     const validCallback = callback || function noop() {};
 
     return new Promise((resolve, reject) => {

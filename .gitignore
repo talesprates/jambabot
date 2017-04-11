@@ -133,3 +133,4 @@ nohup.out
 variables.js
 *.iml
 .idea/
+/nbproject/private/

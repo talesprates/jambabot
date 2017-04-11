@@ -16,8 +16,8 @@ module.exports = (grunt) => {
     appConfig,
     protractor: {
       options: {
-        keepAlive: false,
-        configFile: './protractor.conf.js',
+        //keepAlive: false,
+        configFile: './integrations/ifood/protractor.conf.js',
         noColor: false
       },
       ifood: {
@@ -30,12 +30,7 @@ module.exports = (grunt) => {
                 user: 'fiaobot@gmail.com', // TODO take the login credentials from STDIN
                 password: 'Fi@o1234'
               },
-              envprod: false,
-              dishComment: 'comentário do silvião',
-              dishSize: 'TODAS AS SALADAS',
-              dishOption: 'Ovos fritos',
-              dishSideDish: 'Farofa',
-              dishSalad: 'Alface'
+              envprod: false
             }
           }
         }

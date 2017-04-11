@@ -4,6 +4,7 @@ const ifood = require('../integrations/ifood');
 (() => {
   module.exports = {
     pattern: /^pede ae ([^ ]*?) de ([^,]*), ([^,]*), ([^,]*)(?:, (.*))?$/i,
+    //pattern: /^pede ae jamba$/i,
     handler: pedeAe,
     description: '*silviao pede ae {size} de {dish}, {salad}, {garnish}[, {comment}] ',
     channels: ['delicias-do-jamba', 'dev-delicias-do-jamba']
@@ -22,7 +23,7 @@ const ifood = require('../integrations/ifood');
         return callback('C fude. Kkkkkkkk');
       }
 
-      console.debug('Prestes a chamar o ifood: ', size, dish, salad, garnish, comment);
+      console.log('Prestes a chamar o ifood: ', size, dish, salad, garnish, comment);
       return ifood.pedir(message, size, dish, salad, garnish, comment)
         .then()
         .catch();
