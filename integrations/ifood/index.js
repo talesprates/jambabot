@@ -1,10 +1,6 @@
 const grunt = require('grunt');
 const path = require('path');
 
-//const gruntFile = require('./Gruntfile');
-
-
-
 module.exports = {
   pedir
 };
@@ -28,7 +24,6 @@ function pedir(message, size, dish, salad, garnish, comment = '') {
 
 
     try {
-      //grunt.tasks(['protractor']);
       grunt.cli.tasks = ['protractor'];
       grunt.cli({
         gruntfile: path.join(__dirname, 'Gruntfile.js'),

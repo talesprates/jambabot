@@ -104,8 +104,6 @@ const parseCommand = require('./commands/parseCommand');
             preFormattedText: botMessage.text
           };
 
-          //console.debug(message);
-
           parseCommand(message, (response) => {
             if (response) {
               botInstance.reply(botMessage, response);

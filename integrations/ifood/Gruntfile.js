@@ -16,7 +16,6 @@ module.exports = (grunt) => {
     appConfig,
     protractor: {
       options: {
-        //keepAlive: false,
         configFile: './integrations/ifood/protractor.conf.js',
         noColor: false
       },

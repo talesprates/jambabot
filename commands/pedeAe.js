@@ -4,7 +4,6 @@ const ifood = require('../integrations/ifood');
 (() => {
   module.exports = {
     pattern: /^pede ae ([^ ]*?) de ([^,]*), ([^,]*), ([^,]*)(?:, (.*))?$/i,
-    //pattern: /^pede ae jamba$/i,
     handler: pedeAe,
     description: '*silviao pede ae {size} de {dish}, {salad}, {garnish}[, {comment}] ',
     channels: ['delicias-do-jamba', 'dev-delicias-do-jamba']
