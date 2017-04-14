@@ -22,7 +22,7 @@ const ifood = require('../integrations/ifood');
         return callback('C fude. Kkkkkkkk');
       }
 
-      console.debug('Prestes a chamar o ifood: ', size, dish, salad, garnish, comment);
+      console.log('Prestes a chamar o ifood: ', size, dish, salad, garnish, comment);
       return ifood.pedir(message, size, dish, salad, garnish, comment)
         .then()
         .catch();
