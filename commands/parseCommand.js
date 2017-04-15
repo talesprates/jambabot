@@ -16,7 +16,12 @@ const commands = require('./commands');
 
       if (match) {
         if (isValidCommand(command, message)) {
-          command.handler.apply(this, [message, callback].concat(match.slice(1)));
+          const params = [message, callback];
+          if (command.description.includes('silviao ajuda')) {
+            params.push(commands);
+          }
+
+          command.handler.apply(this, params.concat(match.slice(1)));
         } else {
           callback('C fude kkkkk');
         }

@@ -5,7 +5,7 @@ const ifood = require('../integrations/ifood');
   module.exports = {
     pattern: /^pede ae ([^ ]*?) de ([^,]*), ([^,]*), ([^,]*)(?:, (.*))?$/i,
     handler: pedeAe,
-    description: '*silviao pede ae {size} de {dish}, {salad}, {garnish}[, {comment}] ',
+    description: '*silviao pede ae* : {size} de {dish}, {salad}, {garnish}[, {comment}] ',
     channels: ['delicias-do-jamba', 'dev-delicias-do-jamba']
   };
 
@@ -13,7 +13,7 @@ const ifood = require('../integrations/ifood');
   function pedeAe(message, callback, size, dish, salad, garnish, comment) {
     mongodb.isValidDish(dish)
       .then(runAutomatedOrder)
-      .catch(() => callback('Não entendi nada....'));
+      .catch(() => callback('Não tem esse prato ai não'));
 
 
     function runAutomatedOrder(isValidDish) {
@@ -24,8 +24,8 @@ const ifood = require('../integrations/ifood');
 
       console.log('Prestes a chamar o ifood: ', size, dish, salad, garnish, comment);
       return ifood.pedir(message, size, dish, salad, garnish, comment)
-        .then()
-        .catch();
+        .then(callback)
+        .catch(callback);
     }
   }
 })();

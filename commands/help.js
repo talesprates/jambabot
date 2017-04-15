@@ -1,14 +1,13 @@
 const isValidCommand = require('./utils/isValidCommand');
-const commands = require('./commands');
 
 (() => {
-  function help(message, callback, invalidCommand) {
+  function help(message, callback, commands, invalidCommand) {
     let helpText;
 
     if (invalidCommand) {
       helpText = `Vixxxxxxxi... não entendi nada ..... "${invalidCommand}". Veja aii :\n>>>`;
     } else {
-      helpText = 'Então o que me diz disso aiiii :\n>>>';
+      helpText = 'Então o que me diz disso aiiii 2 :\n>>>';
     }
 
     commands.forEach((command) => {
