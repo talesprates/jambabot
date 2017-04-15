@@ -13,13 +13,13 @@ const ifood = require('../integrations/ifood');
   function pedeAe(message, callback, size, dish, salad, garnish, comment) {
     mongodb.isValidDish(dish)
       .then(runAutomatedOrder)
-      .catch(() => callback('Não tem esse prato ai não'));
+      .catch(() => callback('Não tem esse prato ai não, C fude. Kkkkkkkk'));
 
 
     function runAutomatedOrder(isValidDish) {
       if (!isValidDish) {
         console.info('Não é um prato válido: ', dish);
-        return callback('C fude. Kkkkkkkk');
+        return callback('Não tem esse prato ai não, C fude. Kkkkkkkk');
       }
 
       console.log('Prestes a chamar o ifood: ', size, dish, salad, garnish, comment);
