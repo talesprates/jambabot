@@ -14,5 +14,5 @@ module.exports = {
   GOOGLE_API_KEY: 'Google API Key',
   GOOGLE_CSE_ID: 'Custom Search Engine ID',
 
-  MONGO_CONNECTION_STR: ''
+  MONGO_CONNECTION_STR: 'mongodb://localhost/jambadb'
 };

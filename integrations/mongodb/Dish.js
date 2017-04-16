@@ -39,8 +39,8 @@ const mongoose = require('mongoose');
         }
 
         if (!isAValidDish) {
-          Dish.create({ dish: dish.toLowerCase() }, (errorCreateDish) => {
-            errors.push(errorCreateDish);
+          Dish.create({ dish: dish.toLowerCase() }, (errorCreatingDish) => {
+            errors.push(errorCreatingDish);
             recursivelySaveDishes(dishes, index + 1, errors, callback);
           });
         } else {

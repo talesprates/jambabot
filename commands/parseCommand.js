@@ -1,8 +1,10 @@
 const isValidCommand = require('./utils/isValidCommand');
-const commands = require('./commands');
 
 (() => {
+  /* eslint global-require: 0 */
   function parseCommand(message, callback) {
+    const commands = require('./commands');
+
     commands.some((command) => {
       let match;
 
@@ -17,11 +19,9 @@ const commands = require('./commands');
       if (match) {
         if (isValidCommand(command, message)) {
           const params = [message, callback];
-          if (command.description.includes('silviao ajuda')) {
-            params.push(commands);
-          }
+          params.push(...match.slice(1));
 
-          command.handler.apply(this, params.concat(match.slice(1)));
+          command.handler(...params);
         } else {
           callback('C fude kkkkk');
         }
