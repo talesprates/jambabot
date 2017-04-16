@@ -10,8 +10,8 @@ describe('Choose Dish', () => {
 
     waitElementVisible(ChooseDishPage.buttons.submitComment);
 
-    if (ChooseDishPage.dish.comentario !== null) {
-      ChooseDishPage.fields.commentArea.sendKeys(ChooseDishPage.dish.comentario);
+    if (ChooseDishPage.dish.comentario) {
+      ChooseDishPage.fields.commentArea.click().sendKeys(ChooseDishPage.dish.comentario);
     }
 
     ChooseDishPage.buttons.submitComment.click();

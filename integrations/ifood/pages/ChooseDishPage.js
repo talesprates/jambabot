@@ -1,3 +1,5 @@
+const order = browser.params.order;
+
 module.exports = {
   url: 'https://www.ifood.com.br/delivery/campinas-sp/jambalaya-refeicoes-jardim-flamboyant',
   garnishTab: $('div#garnish'),
@@ -7,13 +9,13 @@ module.exports = {
   },
   fields: {
     commentArea: $('div.popup-shell.popup-obs textarea#obs'),
-    assertionSelector: $(`div[title*="${browser.params.dishSize}"]`)
+    assertionSelector: $(`div[title*="${order.size}"]`)
   },
   dish: {
-    comentario: browser.params.dishComment,
-    tamanho: $(`a.ico-comments.popup-link[title="Adicione ${browser.params.dishSize} ao carrinho"]`),
-    prato: element(By.cssContainingText('div.tabPane[style*="block"] strong.description', browser.params.dishOption)),
-    guarnicao: element(By.cssContainingText('div#cboxLoadedContent strong.description', browser.params.dishSideDish)),
-    salada: element(By.cssContainingText('div#cboxLoadedContent strong.description', 'Saladas diversas'))
+    comentario: order.comment,
+    tamanho: $(`a.ico-comments.popup-link[title="Adicione ${order.size} ao carrinho"]`),
+    prato: element(By.cssContainingText('div.tabPane[style*="block"] strong.description', order.dish)),
+    guarnicao: element(By.cssContainingText('div#cboxLoadedContent strong.description', order.garnish)),
+    salada: element(By.cssContainingText('div#cboxLoadedContent strong.description', order.salad))
   }
 };
