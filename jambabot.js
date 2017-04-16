@@ -22,7 +22,7 @@ const slack = require('./integrations/slack');
       return;
     }
 
-    bot.api.users.info({ user: postData.user_name }, (error, usersInfoResponse) => {
+    slack.bot.api.users.info({ user: postData.user_name }, (error, usersInfoResponse) => {
       const user = usersInfoResponse.user;
       const message = {
         userName: user.name,
