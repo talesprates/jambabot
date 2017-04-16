@@ -1,20 +1,13 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const Botkit = require('botkit');
 
 const variables = require('./variables');
 const parseCommand = require('./commands/parseCommand');
+const slack = require('./integrations/slack');
+
 
 (() => {
   const app = express();
-
-  const BotController = Botkit.slackbot({
-    debug: false
-  });
-
-  const bot = BotController.spawn({
-    token: variables.JAMBABOT_USER_TOKEN
-  });
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -61,7 +54,7 @@ const parseCommand = require('./commands/parseCommand');
 
 
   function startRTM() {
-    bot.startRTM((error) => {
+    slack.bot.startRTM((error) => {
       if (error) {
         console.warn('Failed to start RTM');
         setTimeout(startRTM, 60 * 1000);
@@ -72,11 +65,11 @@ const parseCommand = require('./commands/parseCommand');
     });
   }
 
-  BotController.on('rtm_close', startRTM);
+  slack.controller.on('rtm_close', startRTM);
 
   startRTM();
 
-  BotController.hears('.*', ['direct_message', 'direct_mention', 'mention'], (botInstance, botMessage) => {
+  slack.controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], (botInstance, botMessage) => {
     const api = botInstance.api;
 
     api.users.info({ user: botMessage.user }, (error, usersInfoResponse) => {
@@ -104,6 +97,8 @@ const parseCommand = require('./commands/parseCommand');
             userText: botMessage.text.replace(/\s+/g, ' ').trim(),
             preFormattedText: botMessage.text
           };
+
+          console.info(message);
 
           parseCommand(message, (response) => {
             if (response) {
