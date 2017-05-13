@@ -5,7 +5,8 @@ module.exports = {
   },
   buttons: {
     login: $('input[type="submit"][value="Entrar"]'),
-    proceedToPayment: $('.btn[title*="pagamento"]')
+    proceedToPayment: $('.btn[title*="pagamento"]'),
+    sendOrder: $('li[style*="opacity: 1"] a.btn.finishPayment[title="Enviar Pedido"]')
   },
   fields: {
     email: $('#email_login'),

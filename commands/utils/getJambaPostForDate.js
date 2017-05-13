@@ -11,7 +11,6 @@ const mongodb = require('../../integrations/mongodb');
       .catch(callback);
   }
 
-
   function checkValidDate(date) {
     return new Promise((resolve, reject) => {
       // Check if the date is in the current month (and year, just for safety)

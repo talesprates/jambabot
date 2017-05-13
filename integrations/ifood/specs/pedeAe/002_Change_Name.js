@@ -1,6 +1,6 @@
-const ChangeNamePage = require('../pages/ChangeNamePage');
+const ChangeNamePage = require('../../pages/ChangeNamePage');
 
-xdescribe('Change Username', () => {
+describe('Change Username', () => {
   const { firstName, lastName } = browser.params.user;
 
   it('Replaces the account\'s old name for the current user ', () => {

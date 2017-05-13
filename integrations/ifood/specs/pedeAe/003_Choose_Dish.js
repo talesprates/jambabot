@@ -1,6 +1,6 @@
 /* global element, By, browser, waitElementVisible */
 
-const ChooseDishPage = require('../pages/ChooseDishPage');
+const ChooseDishPage = require('../../pages/ChooseDishPage');
 
 describe('Choose Dish', () => {
   it('Select the dish according to the user parameters', () => {

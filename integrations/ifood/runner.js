@@ -39,7 +39,7 @@ function protractorRunner(opts, resolve, reject) {
     protractorProcess.on('close', (code) => {
       console.log(`protractorProcess process exited with code ${code}`);
       if (!code) {
-        resolve('Pedido feito???');
+        resolve('Pedido feito.');
       } else {
         reject('C fude. Kkkkkkkk');
       }
@@ -130,4 +130,3 @@ function generateArgs(opts) {
 
   return args;
 }
-

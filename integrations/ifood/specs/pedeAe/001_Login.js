@@ -1,9 +1,9 @@
-const spawn = require('child_process').spawn;
-const LoginPage = require('../pages/LoginPage');
-// const ChooseDishPage = require('../pages/ChooseDishPage');
+const LoginPage = require('../../pages/LoginPage');
 
 describe('Try to Login', () => {
   it('Enter the username and password', () => {
+    console.log('envprod', browser.params.envprod);
+
     browser.get(LoginPage.url);
 
     waitElementVisible(LoginPage.fields.email);
@@ -14,14 +14,5 @@ describe('Try to Login', () => {
     LoginPage.buttons.login.click();
 
     expect(LoginPage.profilePicture.isPresent()).toBeTruthy();
-  });
-});
-
-fdescribe('Test Function', () => {
-  it('Function created in order to do protractor related tests', () => {
-    const ls = spawn('ls', ['-l']);
-    ls.stdout.on('data', (data) => {
-      console.log(`${data} rf`);
-    });
   });
 });

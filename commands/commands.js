@@ -9,5 +9,6 @@ module.exports = [
   require('./downvote'),
   require('./rating'),
   require('./help'),
+  require('./ifood'),
   require('./pedeAe')
 ];

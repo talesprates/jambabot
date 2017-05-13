@@ -1,24 +1,16 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const phantomjs = require('phantomjs');
 
 exports.config = {
   specs: [
-    'specs/**/*.js',
+    'specs/menu/**/*.js',
   ],
   multiCapabilities: [
     {
-      browserName: 'chrome',
-      count: 1,
-      chromeOptions: {
-        // args: ['incognito'],
-        prefs: {
-          download: {
-            prompt_for_download: false,
-            directory_upgrade: true,
-            default_directory: `/tmp/${process.pid}`
-          }
-        }
-      }
+      browserName: 'phantomjs',
+      'phantomjs.binary.path': phantomjs.path,
+      count: 1
     }
   ],
   framework: 'jasmine2',
@@ -36,7 +28,7 @@ function onPrepare() {
   browser.ignoreSynchronization = true;
   browser.driver.ignoreSynchronization = true;
   configChai();
-  browser.manage().window().setSize(1600, 1000);
+  browser.manage().window().setSize(640, 480);
   global.waitElementVisible = waitElementVisible;
   global.waitElementDisapear = waitElementDisapear;
 }
