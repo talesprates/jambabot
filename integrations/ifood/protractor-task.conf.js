@@ -5,23 +5,12 @@ module.exports = {
   protractorMenuConfig
 };
 
+
 function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '') {
   return {
-    keepAlive: false,
-    noColor: false,
-    debug: false,
-    nodeBin: 'node',
-    output: false,
-    outputOptions: {},
-    webdriverManagerUpdate: true,
+    configFile: './integrations/ifood/protractor-pedeAe.conf.js',
     args: {
-      baseUrl: '',
       params: {
-        login: {
-          user: variables.GMAIL_ACCOUNT,
-          password: variables.GMAIL_PASSWORD
-        },
-        envprod: !variables.JAMBABOT_DEBUG,
         order: {
           size,
           dish,
@@ -36,29 +25,38 @@ function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '
         }
       }
     },
-    configFile: './integrations/ifood/protractor-pedeAe.conf.js'
   };
 }
 
+
 function protractorMenuConfig() {
-  return {
-    keepAlive: false,
-    noColor: false,
-    debug: false,
-    nodeBin: 'node',
-    output: false,
-    outputOptions: {},
-    webdriverManagerUpdate: true,
-    args: {
-      baseUrl: '',
-      params: {
-        login: {
-          user: variables.GMAIL_ACCOUNT,
-          password: variables.GMAIL_PASSWORD
-        },
-        envprod: !variables.JAMBABOT_DEBUG
+  return baseTaskConfig({
+    configFile: './integrations/ifood/protractor-menu.conf.js'
+  });
+}
+
+
+function baseTaskConfig(customConfig) {
+  return Object.assign(
+    {
+      keepAlive: false,
+      noColor: false,
+      debug: false,
+      nodeBin: 'node',
+      output: false,
+      outputOptions: {},
+      webdriverManagerUpdate: true,
+      args: {
+        baseUrl: '',
+        params: {
+          login: {
+            user: variables.GMAIL_ACCOUNT,
+            password: variables.GMAIL_PASSWORD
+          },
+          envprod: !variables.JAMBABOT_DEBUG
+        }
       }
     },
-    configFile: './integrations/ifood/protractor-menu.conf.js'
-  };
+    customConfig
+  );
 }

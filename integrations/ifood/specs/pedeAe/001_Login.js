@@ -13,6 +13,6 @@ describe('Try to Login', () => {
 
     LoginPage.buttons.login.click();
 
-    expect(LoginPage.profilePicture.isPresent()).toBeTruthy();
+    LoginPage.profilePicture.isPresent().should.eventually.equal(true);
   });
 });

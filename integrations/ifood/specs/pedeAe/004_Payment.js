@@ -12,6 +12,7 @@ describe('Payment Method', () => {
       waitElementVisible(PaymentPage.buttons.sendOrder).then(e => e.click());
     }
 
+    // TODO tirar print e mandar em private
     browser.sleep(5000);
   });
 });

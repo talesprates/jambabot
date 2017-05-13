@@ -1,4 +1,4 @@
-const order = browser.params.order;
+const order = browser.params.order || {};
 let dishSize;
 
 if (order.size === 'minimini') {

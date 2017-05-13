@@ -6,37 +6,36 @@ describe('Choose Dish', () => {
   it('Select the dish according to the user parameters', () => {
     browser.get(ChooseDishPage.url);
 
-    waitElementVisible(ChooseDishPage.dish.tamanho).then(e => e.click());
+    const { dish, buttons } = ChooseDishPage;
 
-    waitElementVisible(ChooseDishPage.buttons.submitComment);
+    waitElementVisible(dish.tamanho).then(e => e.click());
 
-    if (ChooseDishPage.dish.comentario) {
-      ChooseDishPage.fields.commentArea.click().sendKeys(ChooseDishPage.dish.comentario);
+    waitElementVisible(buttons.submitComment);
+
+    // TODO testar flow sem comentário
+    if (dish.comentario) {
+      ChooseDishPage.fields.commentArea.click().sendKeys(dish.comentario);
     }
 
-    ChooseDishPage.buttons.submitComment.click();
+    buttons.submitComment.click();
 
     waitElementVisible(ChooseDishPage.garnishTab);
 
-    waitElementVisible(ChooseDishPage.dish.prato).then(e => e.click());
+    waitElementVisible(dish.prato).then(e => e.click());
 
-    waitElementVisible(ChooseDishPage.buttons.nextButton).then(e => e.click());
+    waitElementVisible(buttons.nextButton).then(e => e.click());
 
-    waitElementVisible(ChooseDishPage.dish.guarnicao).then(e => e.click());
+    waitElementVisible(dish.guarnicao).then(e => e.click());
 
-    waitElementVisible(ChooseDishPage.buttons.nextButton).then(e => e.click());
+    waitElementVisible(buttons.nextButton).then(e => e.click());
 
-    waitElementVisible(ChooseDishPage.dish.salada).then(e => e.click());
+    waitElementVisible(dish.salada).then(e => e.click());
 
-    waitElementVisible(ChooseDishPage.buttons.nextButton).then(e => e.click());
+    waitElementVisible(buttons.nextButton).then(e => e.click());
 
-    // element(By.cssContainingText('strong', 'Não Quero')).click();
+    waitElementVisible(buttons.nextButton).then(e => e.click());
 
-    waitElementVisible(ChooseDishPage.buttons.nextButton).then(e => e.click());
-
-    // element(By.cssContainingText('strong', 'Não Quero')).click();
-
-    waitElementVisible(ChooseDishPage.buttons.nextButton).then(e => e.click());
+    waitElementVisible(buttons.nextButton).then(e => e.click());
 
     waitElementVisible(ChooseDishPage.fields.assertionSelector);
 
