@@ -9,6 +9,7 @@
     "chai-as-promised": "^6.0.0",
     "eslint-plugin-node": "^4.2.2",
     "express": "^4.15.2",
+    "fs-extra": "^3.0.1",
     "google-auth-library": "^0.10.0",
     "google-images": "^1.0.0",
     "googleapis": "^19.0.0",

@@ -1,4 +1,4 @@
-const Mail = require('./Mail');
+const Mail = require('./MailManager');
 
 (() => {
   module.exports = {
