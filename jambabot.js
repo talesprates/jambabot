@@ -42,7 +42,7 @@ const slack = require('./integrations/slack');
     });
   });
 
-  app.listen(6001, () => {
+  const server = app.listen(6001, () => {
     console.info('jambabot app listening on port 6001!');
     console.info(`variables: ${JSON.stringify(variables)}`);
   });
@@ -108,5 +108,13 @@ const slack = require('./integrations/slack');
         });
       });
     });
+  });
+
+  /*
+   * Ensure that the express server will not keep running after close node
+   */
+  process.on('SIGTERM', () => {
+    console.log('Stopping the server');
+    server.close(() => { process.exit(0); });
   });
 })();
