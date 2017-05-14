@@ -50,8 +50,8 @@ function baseTaskConfig(customConfig) {
         baseUrl: '',
         params: {
           login: {
-            user: variables.GMAIL_ACCOUNT,
-            password: variables.GMAIL_PASSWORD
+            user: variables.IFOOD_ACCOUNT,
+            password: variables.IFOOD_PASSWORD
           },
           envprod: !variables.JAMBABOT_DEBUG
         }

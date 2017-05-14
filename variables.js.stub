@@ -16,6 +16,6 @@ module.exports = {
 
   MONGO_CONNECTION_STR: 'mongodb://localhost/jambadb',
 
-  GMAIL_ACCOUNT: '',
-  GMAIL_PASSWORD: ''
+  IFOOD_ACCOUNT: '',
+  IFOOD_PASSWORD: ''
 };

@@ -1,7 +1,3 @@
-// const request = require('request');
-// const isValidCommand = require('./utils/isValidCommand');
-// const cheerio = require('cheerio');
-// const ifood2 = require('../integrations/ifood');
 const mongodb = require('../integrations/mongodb');
 
 (() => {
