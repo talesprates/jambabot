@@ -5,7 +5,7 @@ const isValidCommand = require('./utils/isValidCommand');
   function parseCommand(message, callback) {
     const commands = require('./commands');
 
-    commands.some((command) => {
+    const parsed = commands.some((command) => {
       let match;
 
       if (command.acceptsPreFormattedText && message.preFormattedText) {
@@ -31,6 +31,10 @@ const isValidCommand = require('./utils/isValidCommand');
 
       return false;
     });
+
+    if (!parsed) {
+      callback(false);
+    }
   }
 
   module.exports = parseCommand;
