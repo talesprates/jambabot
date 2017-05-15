@@ -2,18 +2,22 @@ const mongodb = require('../integrations/mongodb');
 
 (() => {
   /* eslint global-require: 0 */
-  function ifood(message, callback) {
+  function ifood(message, callback, dishSize) {
     console.log('Prestes a chamar o ifood cardapio');
     console.log(message);
     return mongodb.getTodayMenu()
-    .then(generateMenuMessage)
+    .then(menuStored => generateMenuMessage(menuStored, dishSize))
     .then(callback)
     .catch(callback);
   }
 
-  function generateMenuMessage(menuStored) {
+  function generateMenuMessage(menuStored, dishSize) {
     const result = [];
-    const menu = menuStored.menu;
+    let menu = menuStored.menu;
+
+    if (menu[dishSize]) {
+      menu = { [dishSize]: menu[dishSize] };
+    }
 
     Object.keys(menu).forEach((key) => {
       const size = menu[key];
@@ -30,9 +34,9 @@ const mongodb = require('../integrations/mongodb');
   }
 
   module.exports = {
-    pattern: /^ifood$/,
+    pattern: /^ifood(?: (.*))?$/,
     handler: ifood,
-    description: '*silviao ifood* : Gets today\'s ifood menu',
+    description: '*silviao ifood [size]* : Gets today\'s ifood menu',
     channels: ['delicias-do-jamba', 'dev-delicias-do-jamba']
   };
 })();
