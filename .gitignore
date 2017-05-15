@@ -135,4 +135,4 @@ variables.js
 .idea/
 /nbproject/private/
 
-integrations/gmail/credentials/
+integrations/gmail/credentials/*.json
