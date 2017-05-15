@@ -7,7 +7,7 @@ module.exports = {
 
 
 function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '') {
-  return {
+  return baseTaskConfig({
     configFile: './integrations/ifood/protractor-pedeAe.conf.js',
     args: {
       params: {
@@ -25,7 +25,7 @@ function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '
         }
       }
     },
-  };
+  });
 }
 
 
@@ -35,7 +35,7 @@ function protractorMenuConfig() {
   });
 }
 
-
+// TODO logins are not being passed
 function baseTaskConfig(customConfig) {
   return Object.assign(
     {
