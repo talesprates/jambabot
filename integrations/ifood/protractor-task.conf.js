@@ -1,3 +1,5 @@
+const { merge } = require('lodash');
+
 const variables = require('../../variables');
 
 module.exports = {
@@ -37,7 +39,7 @@ function protractorMenuConfig() {
 
 // TODO logins are not being passed
 function baseTaskConfig(customConfig) {
-  return Object.assign(
+  return merge(
     {
       keepAlive: false,
       noColor: false,
