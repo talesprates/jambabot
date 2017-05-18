@@ -8,7 +8,7 @@ module.exports = {
 };
 
 
-function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '') {
+function protractorPedeAeConfig(message, size, dish, garnish, salad, accountNumber, comment = '') {
   return baseTaskConfig({
     configFile: './integrations/ifood/protractor-pedeAe.conf.js',
     args: {
@@ -24,7 +24,8 @@ function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '
           userName: message.userName,
           firstName: message.firstName,
           lastName: message.lastName
-        }
+        },
+        accountNumber
       }
     },
   });
