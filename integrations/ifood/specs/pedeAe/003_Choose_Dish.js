@@ -12,7 +12,6 @@ describe('Choose Dish', () => {
 
     waitElementVisible(buttons.submitComment);
 
-    // TODO testar flow sem comentário
     if (dish.comentario) {
       ChooseDishPage.fields.commentArea.click().sendKeys(dish.comentario);
     }

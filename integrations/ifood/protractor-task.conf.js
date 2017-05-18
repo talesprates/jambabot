@@ -38,7 +38,6 @@ function protractorMenuConfig() {
   });
 }
 
-// TODO logins are not being passed
 function baseTaskConfig(customConfig) {
   return merge(
     {
