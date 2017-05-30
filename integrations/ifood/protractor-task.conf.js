@@ -8,7 +8,11 @@ module.exports = {
 };
 
 
-function protractorPedeAeConfig(message, size, dish, garnish, salad, accountNumber, comment = '') {
+let accountNumber = -1;
+
+
+function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '') {
+
   return baseTaskConfig({
     configFile: './integrations/ifood/protractor-pedeAe.conf.js',
     args: {
@@ -24,8 +28,7 @@ function protractorPedeAeConfig(message, size, dish, garnish, salad, accountNumb
           userName: message.userName,
           firstName: message.firstName,
           lastName: message.lastName
-        },
-        accountNumber
+        }
       }
     },
   });
@@ -39,6 +42,8 @@ function protractorMenuConfig() {
 }
 
 function baseTaskConfig(customConfig) {
+  accountNumber = (accountNumber + 1) % variables.IFOOD_ACCOUNTS_QTY;
+
   return merge(
     {
       keepAlive: false,
@@ -55,7 +60,8 @@ function baseTaskConfig(customConfig) {
             user: variables.IFOOD_ACCOUNT,
             password: variables.IFOOD_PASSWORD
           },
-          envprod: !variables.JAMBABOT_DEBUG
+          envprod: !variables.JAMBABOT_DEBUG,
+          accountNumber
         }
       }
     },

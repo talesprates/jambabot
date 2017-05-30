@@ -32,7 +32,6 @@ const variables = require('../../variables');
 
     getTodayMenu: Menu.getTodayMenu,
     saveTodayMenu: Menu.saveTodayMenu,
-    checkTodayMenu: Menu.checkTodayMenu,
     isValidSize: Menu.isValidSize,
     isValidGarnish: Menu.isValidGarnish,
     isValidSalad: Menu.isValidSalad,

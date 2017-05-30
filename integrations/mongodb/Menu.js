@@ -94,7 +94,7 @@ const mongoose = require('mongoose');
   }
 
   function isValidSalad(size, salad) {
-    console.log('is valid garnish', size, salad);
+    console.log('is valid salad', size, salad);
 
     return new Promise((resolve, reject) => {
       const todayFormattedDate = getTodayDate();

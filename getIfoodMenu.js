@@ -10,8 +10,10 @@ mongodb.getTodayMenu()
 })
 .catch(() => {
   ifood.cardapio()
-    .then(() => {
-      console.log('menu stored with sucess');
+    .then((cardapio) => {
+      mongodb.saveTodayMenu(cardapio)
+        .then(() => console.log('menu stored with sucess'))
+        .catch(() => console.log('duplicate menu'));
       process.exit(0);
     })
     .catch(() => {
