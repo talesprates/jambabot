@@ -1,7 +1,3 @@
-const Mail = require('./MailManager');
+const MailManager = require('./MailManager');
 
-(() => {
-  module.exports = {
-    getMail: Mail.getMail
-  };
-})();
+module.exports = MailManager;
