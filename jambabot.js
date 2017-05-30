@@ -47,27 +47,18 @@ const slack = require('./integrations/slack');
     console.info(`variables: ${JSON.stringify(variables)}`);
   });
 
-
   function isValidToken(token) {
     return token === variables.JAMBABOT_DEBUG_TOKEN || token === variables.JAMBABOT_PROD_TOKEN;
   }
 
+  slack.bot.startRTM((error) => {
+    if (error) {
+      console.warn(`Failed to start RTM: ${error}`);
+      return;
+    }
 
-  function startRTM() {
-    slack.bot.startRTM((error) => {
-      if (error) {
-        console.warn('Failed to start RTM');
-        setTimeout(startRTM, 60 * 1000);
-        return;
-      }
-
-      console.info('RTM started!');
-    });
-  }
-
-  slack.controller.on('rtm_close', startRTM);
-
-  startRTM();
+    console.info('RTM started!');
+  });
 
   slack.controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], (botInstance, botMessage) => {
     const api = botInstance.api;

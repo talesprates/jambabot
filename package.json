@@ -19,7 +19,7 @@
     "lodash": "^4.17.4",
     "lolex": "^1.6.0",
     "mocha": "^3.2.0",
-    "mongoose": "^4.9.3",
+    "mongoose": "^4.9.5",
     "node-gmail-api": "^0.6.0",
     "phantomjs": "^2.1.7",
     "protractor": "^5.1.1",
