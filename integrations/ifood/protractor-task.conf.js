@@ -1,3 +1,5 @@
+const { merge } = require('lodash');
+
 const variables = require('../../variables');
 
 module.exports = {
@@ -6,8 +8,8 @@ module.exports = {
 };
 
 
-function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '') {
-  return {
+function protractorPedeAeConfig(message, size, dish, garnish, salad, accountNumber, comment = '') {
+  return baseTaskConfig({
     configFile: './integrations/ifood/protractor-pedeAe.conf.js',
     args: {
       params: {
@@ -22,10 +24,11 @@ function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '
           userName: message.userName,
           firstName: message.firstName,
           lastName: message.lastName
-        }
+        },
+        accountNumber
       }
     },
-  };
+  });
 }
 
 
@@ -35,9 +38,8 @@ function protractorMenuConfig() {
   });
 }
 
-
 function baseTaskConfig(customConfig) {
-  return Object.assign(
+  return merge(
     {
       keepAlive: false,
       noColor: false,
@@ -50,8 +52,8 @@ function baseTaskConfig(customConfig) {
         baseUrl: '',
         params: {
           login: {
-            user: variables.GMAIL_ACCOUNT,
-            password: variables.GMAIL_PASSWORD
+            user: variables.IFOOD_ACCOUNT,
+            password: variables.IFOOD_PASSWORD
           },
           envprod: !variables.JAMBABOT_DEBUG
         }

@@ -50,7 +50,7 @@ function protractorRunner(opts, resolve, reject) {
 
 function generateArgs(opts) {
   let args = process.execArgv.concat([protractorBinPath, opts.configFile]);
-  args = args.filter(a => !/inspect=|debug-brk/.test(a));
+  args = args.filter(a => !/inspect=*|debug-brk/.test(a));
 
   if (opts.noColor) {
     args.push('--no-jasmineNodeOpts.showColors');
