@@ -12,7 +12,6 @@ let accountNumber = -1;
 
 
 function protractorPedeAeConfig(message, size, dish, garnish, salad, comment = '') {
-
   return baseTaskConfig({
     configFile: './integrations/ifood/protractor-pedeAe.conf.js',
     args: {

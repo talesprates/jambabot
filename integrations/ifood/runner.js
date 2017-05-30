@@ -1,5 +1,6 @@
 const path = require('path');
 const cd = require('child_process');
+
 const spawn = cd.spawn;
 
 const protractorMainPath = require.resolve('protractor');
@@ -33,17 +34,19 @@ function protractorRunner(opts, resolve, reject) {
   function startProtractor() {
     console.log('Spawn protractor with arguments: ', args.join(' '));
 
-    const protractorProcess = cd.fork(protractorBinPath, args, { execArgv: generateForkExecArgs() });
     let protractorResult;
+    const protractorProcess = cd.fork(protractorBinPath, args, {
+      execArgv: generateForkExecArgs()
+    });
 
     // protractorProcess.stdout.on('data', (data) => { console.log(`stdout: ${data}`); });
     // protractorProcess.stderr.on('data', (data) => { console.log(`stderr: ${data}`); });
 
-    protractorProcess.on('message',(result) => {
+    protractorProcess.on('message', (result) => {
       protractorResult = result;
     });
 
-    protractorProcess.on('result',(result) => {
+    protractorProcess.on('result', (result) => {
       console.log('message: ', result);
       // protractorResult = result;
     });

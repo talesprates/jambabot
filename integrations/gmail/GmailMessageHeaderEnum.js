@@ -1,4 +1,3 @@
-'use strict';
 
 const GmailMessageHeaderEnum = {
   DELIVEREDTO: 0,

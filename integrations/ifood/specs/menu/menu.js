@@ -1,13 +1,12 @@
 const MenuPage = require('../../pages/MenuPage');
 const ChooseDishPage = require('../../pages/ChooseDishPage');
-const mongodb = require('../../../../integrations/mongodb');
 
 
 describe('Get Today Menu', () => {
   const cardapio = {};
 
 
-  after(function () {
+  after(() => {
     MenuPage.buttons.nextTab.click();
     waitElementVisible(MenuPage.fields.tab3);
 
