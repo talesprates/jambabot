@@ -8,7 +8,6 @@ const variables = require('../../variables');
 
 module.exports = protractorBaseConfig;
 
-
 function protractorBaseConfig(customConfig) {
   return _.mergeWith(generateDefaultConfigs(), customConfig, mergeArrays);
 }
@@ -17,7 +16,6 @@ function generateDefaultConfigs() {
   const configs = {
     specs: [], // should be passed every time
     multiCapabilities: [],
-    // framework: 'jasmine2', // disabled because doesn't have after()
     framework: 'mocha',
     mochaOpts: {
       ui: 'bdd',
@@ -36,7 +34,6 @@ function generateDefaultConfigs() {
       browserName: 'chrome',
       count: 1,
       chromeOptions: {
-        // args: ['incognito'],
         prefs: {
           download: {
             prompt_for_download: false,
@@ -57,7 +54,6 @@ function generateDefaultConfigs() {
   return configs;
 }
 
-
 function mergeArrays(objValue, srcValue) {
   if (_.isArray(objValue)) {
     return objValue.concat(srcValue);
@@ -65,7 +61,6 @@ function mergeArrays(objValue, srcValue) {
 
   return undefined;
 }
-
 
 function onPrepare() {
   browser.ignoreSynchronization = true;
@@ -75,7 +70,6 @@ function onPrepare() {
   global.waitElementVisible = waitElementVisible;
   global.waitElementDisapear = waitElementDisapear;
 }
-
 
 function configChai() {
   chai.use(chaiAsPromised);
@@ -92,7 +86,6 @@ function configChai() {
 }
 
 /**
- *
  * @param {String|ProtractorBy} target
  * @returns {Promise<ElementFinder>}
  */
@@ -102,9 +95,7 @@ function waitElementVisible(target) {
   return browser.wait(EC.visibilityOf(elementTarget), 10000).then(() => elementTarget);
 }
 
-
 /**
- *
  * @param {String|ProtractorBy} target
  * @returns {Promise<ElementFinder>}
  */
@@ -113,7 +104,6 @@ function waitElementDisapear(target) {
   const elementTarget = getElement(target);
   return browser.wait(EC.not(EC.visibilityOf(elementTarget)), 10000).then(() => elementTarget);
 }
-
 
 /**
  * @param {String|ProtractorBy|ElementFinder} target
@@ -132,4 +122,3 @@ function getElement(target) {
   // It is already the result of element(By()) or $()
   return target;
 }
-

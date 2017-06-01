@@ -7,10 +7,8 @@ describe('Change Username', () => {
     browser.get(ChangeNamePage.url);
 
     waitElementVisible(ChangeNamePage.fields.name);
-
     ChangeNamePage.fields.name.clear().sendKeys(`${firstName} ${lastName}`);
     ChangeNamePage.buttons.saveData.click();
-
     waitElementVisible(ChangeNamePage.buttons.closeModal);
   });
 });

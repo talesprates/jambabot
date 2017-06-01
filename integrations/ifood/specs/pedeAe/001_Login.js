@@ -7,11 +7,8 @@ describe('Try to Login', () => {
     waitElementVisible(LoginPage.fields.email);
 
     LoginPage.fields.email.sendKeys(browser.params.login.user.replace('@', `${browser.params.accountNumber}@`));
-
     LoginPage.fields.password.sendKeys(browser.params.login.password);
-
     LoginPage.buttons.login.click();
-
     LoginPage.profilePicture.isPresent().should.eventually.equal(true);
   });
 });

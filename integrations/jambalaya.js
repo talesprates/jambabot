@@ -1,6 +1,5 @@
 const request = require('request');
 const iconvlite = require('iconv-lite');
-
 const mongodb = require('./mongodb');
 
 (() => {

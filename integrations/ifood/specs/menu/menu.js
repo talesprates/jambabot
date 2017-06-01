@@ -1,10 +1,8 @@
 const MenuPage = require('../../pages/MenuPage');
 const ChooseDishPage = require('../../pages/ChooseDishPage');
 
-
 describe('Get Today Menu', () => {
   const cardapio = {};
-
 
   after(() => {
     MenuPage.buttons.nextTab.click();
@@ -14,7 +12,6 @@ describe('Get Today Menu', () => {
       process.send(cardapio);
     }
   });
-
 
   describe('Reads each dish, garnish, and salad from each size', () => {
     beforeEach(() => {
@@ -28,14 +25,12 @@ describe('Get Today Menu', () => {
         .then(() => extractMenuForSize(cardapio.mini));
     });
 
-
     it('MARMITEX MINI mini', () => {
       cardapio.minimini = baseDish();
       waitElementVisible(MenuPage.buttons.addMinimini)
         .then(e => e.click())
         .then(() => extractMenuForSize(cardapio.minimini));
     });
-
 
     it('TODAS AS SALADAS', () => {
       cardapio.todasassaladas = baseDish();
@@ -44,7 +39,6 @@ describe('Get Today Menu', () => {
         .then(() => extractMenuForSize(cardapio.todasassaladas));
     });
 
-
     it('MARMITEX EXECUTIVA', () => {
       cardapio.executiva = baseDish();
       waitElementVisible(MenuPage.buttons.addExecutiva)
@@ -52,11 +46,9 @@ describe('Get Today Menu', () => {
         .then(() => extractMenuForSize(cardapio.executiva));
     });
 
-
     function baseDish() {
       return { dish: [], garnish: [], salad: [] };
     }
-
 
     function extractMenuForSize(size) {
       waitElementVisible(MenuPage.buttons.addDish).then(e => e.click());

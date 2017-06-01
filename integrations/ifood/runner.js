@@ -14,7 +14,6 @@ const objectArgs = ['params', 'capabilities', 'cucumberOpts', 'mochaOpts'];
 
 module.exports = protractorRunner;
 
-
 function protractorRunner(opts, resolve, reject) {
   const args = generateArgs(opts);
 
@@ -30,7 +29,6 @@ function protractorRunner(opts, resolve, reject) {
     reject(e.message);
   }
 
-
   function startProtractor() {
     console.log('Spawn protractor with arguments: ', args.join(' '));
 
@@ -39,8 +37,6 @@ function protractorRunner(opts, resolve, reject) {
       execArgv: generateForkExecArgs()
     });
 
-    // protractorProcess.stdout.on('data', (data) => { console.log(`stdout: ${data}`); });
-    // protractorProcess.stderr.on('data', (data) => { console.log(`stderr: ${data}`); });
 
     protractorProcess.on('message', (result) => {
       protractorResult = result;
@@ -48,7 +44,6 @@ function protractorRunner(opts, resolve, reject) {
 
     protractorProcess.on('result', (result) => {
       console.log('message: ', result);
-      // protractorResult = result;
     });
 
     protractorProcess.on('close', (code) => {

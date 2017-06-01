@@ -1,7 +1,6 @@
 const Botkit = require('botkit');
 const variables = require('../variables');
 
-
 (() => {
   exports.controller = Botkit.slackbot({
     debug: false

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 (() => {
   const DishImageSchema = mongoose.Schema({
     dish: { type: String, unique: true },

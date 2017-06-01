@@ -20,11 +20,11 @@ module.exports = {
     commentArea: $('div.popup-shell.popup-obs textarea#obs'),
     assertionSelector: $(`div[title*="${dishSize}"]`)
   },
-  dish: {
-    comentario: order.comment,
-    tamanho: $(`a.ico-comments.popup-link[title="Adicione ${dishSize} ao carrinho"]`),
-    prato: element(By.cssContainingText('div.tabPane[style*="block"] strong.description', order.dish)),
-    guarnicao: element(By.cssContainingText('div.tabPane[style*="block"]  strong.description', order.garnish)),
-    salada: element(By.cssContainingText('div.tabPane[style*="block"] strong.description', order.salad))
+  order: {
+    comment: order.comment,
+    size: $(`a.ico-comments.popup-link[title="Adicione ${dishSize} ao carrinho"]`),
+    dish: element(By.cssContainingText('div.tabPane[style*="block"] strong.description', order.dish)),
+    garnish: element(By.cssContainingText('div.tabPane[style*="block"]  strong.description', order.garnish)),
+    salad: element(By.cssContainingText('div.tabPane[style*="block"] strong.description', order.salad))
   }
 };

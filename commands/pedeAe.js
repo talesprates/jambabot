@@ -1,8 +1,5 @@
 const mongodb = require('../integrations/mongodb');
 const ifood = require('../integrations/ifood');
-const { IFOOD_ACCOUNTS_QTY } = require('../variables.js');
-
-let accountNumber = 0;
 
 (() => {
   module.exports = {
