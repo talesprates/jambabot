@@ -24,10 +24,19 @@ let accountNumber = 0;
 
 
     function runAutomatedOrder() {
-      console.log('Prestes a chamar o ifood: size: ', size, ' dish: ', dish, ' salad: ', salad, ' garnish ', garnish, ' accountNumber: ', accountNumber, ' comment ', comment);
-      accountNumber += 1;
-      return ifood.pedir(message, size, dish, garnish, salad,
-        (accountNumber - 1) % IFOOD_ACCOUNTS_QTY, comment);
+      console.log(
+        'Prestes a chamar o ifood: size:',
+        size,
+        'dish:',
+        dish,
+        'salad:',
+        salad,
+        'garnish',
+        garnish,
+        'comment',
+        comment
+      );
+      return ifood.pedir(message, size, dish, garnish, salad, comment);
     }
   }
 })();

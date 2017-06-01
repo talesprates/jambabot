@@ -22,7 +22,8 @@ function generateDefaultConfigs() {
     mochaOpts: {
       ui: 'bdd',
       reporter: 'spec',
-      timeout: 60000
+      timeout: 60000,
+      bail: true
     },
     onPrepare
   };

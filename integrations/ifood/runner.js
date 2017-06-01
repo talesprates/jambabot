@@ -1,5 +1,7 @@
 const path = require('path');
-const spawn = require('child_process').spawn;
+const cd = require('child_process');
+
+const spawn = cd.spawn;
 
 const protractorMainPath = require.resolve('protractor');
 const protractorBinPath = path.resolve(protractorMainPath, '../../bin/protractor');
@@ -32,14 +34,27 @@ function protractorRunner(opts, resolve, reject) {
   function startProtractor() {
     console.log('Spawn protractor with arguments: ', args.join(' '));
 
-    const protractorProcess = spawn(opts.nodeBin, args);
+    let protractorResult;
+    const protractorProcess = cd.fork(protractorBinPath, args, {
+      execArgv: generateForkExecArgs()
+    });
 
-    protractorProcess.stdout.on('data', (data) => { console.log(`stdout: ${data}`); });
-    protractorProcess.stderr.on('data', (data) => { console.log(`stderr: ${data}`); });
+    // protractorProcess.stdout.on('data', (data) => { console.log(`stdout: ${data}`); });
+    // protractorProcess.stderr.on('data', (data) => { console.log(`stderr: ${data}`); });
+
+    protractorProcess.on('message', (result) => {
+      protractorResult = result;
+    });
+
+    protractorProcess.on('result', (result) => {
+      console.log('message: ', result);
+      // protractorResult = result;
+    });
+
     protractorProcess.on('close', (code) => {
-      console.log(`protractorProcess process exited with code ${code}`);
+      console.log(`protractorProcess exited with code ${code}`);
       if (!code) {
-        resolve('Pedido feito.');
+        resolve(protractorResult);
       } else {
         reject('C fude. Kkkkkkkk');
       }
@@ -47,9 +62,23 @@ function protractorRunner(opts, resolve, reject) {
   }
 }
 
+function generateForkExecArgs() {
+  const execArgs = [];
+
+  if (process.execArgv && process.execArgv.length) {
+    const isDebugMode = process.execArgv.some(arg => /inspect=*|debug-brk/.test(arg));
+
+    if (isDebugMode) {
+      // execArgs.push('--inspect-brk');
+    }
+  }
+
+  return execArgs;
+}
+
 
 function generateArgs(opts) {
-  let args = process.execArgv.concat([protractorBinPath, opts.configFile]);
+  let args = process.execArgv.concat([opts.configFile]);
   args = args.filter(a => !/inspect=*|debug-brk/.test(a));
 
   if (opts.noColor) {

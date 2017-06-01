@@ -1,6 +1,7 @@
 const google = require('googleapis');
 
 const { authenticate } = require('./MailAuth');
+const HeadersEnum = require('./GmailMessageHeaderEnum');
 
 const gmail = google.gmail('v1');
 
@@ -32,7 +33,7 @@ const GmailMessageHeaderEnum = {
 (() => {
   module.exports = {
     getMails,
-    GmailMessageHeaderEnum
+    HeadersEnum
   };
 
   function getMails(query) {

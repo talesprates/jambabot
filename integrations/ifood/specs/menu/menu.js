@@ -1,35 +1,28 @@
 const MenuPage = require('../../pages/MenuPage');
 const ChooseDishPage = require('../../pages/ChooseDishPage');
-const mongodb = require('../../../../integrations/mongodb');
 
 
 describe('Get Today Menu', () => {
-  const cardapio = {
-    mini: { dish: [], garnish: [], salad: [] },
-    minimini: { dish: [], garnish: [], salad: [] },
-    todasassaladas: { dish: [], garnish: [], salad: [] },
-    executiva: { dish: [], garnish: [], salad: [] }
-  };
+  const cardapio = {};
 
 
   after(() => {
     MenuPage.buttons.nextTab.click();
     waitElementVisible(MenuPage.fields.tab3);
 
-    console.log(cardapio);
-
-    mongodb.saveTodayMenu(cardapio)
-      .then(() => console.log('menu created'))
-      .catch(() => console.log('duplicate menu'));
+    if (Object.keys(cardapio).length === 4) {
+      process.send(cardapio);
+    }
   });
 
 
-  describe('Reads each dish, garnish, and salad from each size and stores on mongodb', () => {
+  describe('Reads each dish, garnish, and salad from each size', () => {
     beforeEach(() => {
       browser.get(ChooseDishPage.url);
     });
 
     it('MARMITEX MINI', () => {
+      cardapio.mini = baseDish();
       waitElementVisible(MenuPage.buttons.addMini)
         .then(e => e.click())
         .then(() => extractMenuForSize(cardapio.mini));
@@ -37,6 +30,7 @@ describe('Get Today Menu', () => {
 
 
     it('MARMITEX MINI mini', () => {
+      cardapio.minimini = baseDish();
       waitElementVisible(MenuPage.buttons.addMinimini)
         .then(e => e.click())
         .then(() => extractMenuForSize(cardapio.minimini));
@@ -44,6 +38,7 @@ describe('Get Today Menu', () => {
 
 
     it('TODAS AS SALADAS', () => {
+      cardapio.todasassaladas = baseDish();
       waitElementVisible(MenuPage.buttons.addTodasassaladas)
         .then(e => e.click())
         .then(() => extractMenuForSize(cardapio.todasassaladas));
@@ -51,10 +46,16 @@ describe('Get Today Menu', () => {
 
 
     it('MARMITEX EXECUTIVA', () => {
+      cardapio.executiva = baseDish();
       waitElementVisible(MenuPage.buttons.addExecutiva)
         .then(e => e.click())
         .then(() => extractMenuForSize(cardapio.executiva));
     });
+
+
+    function baseDish() {
+      return { dish: [], garnish: [], salad: [] };
+    }
 
 
     function extractMenuForSize(size) {
