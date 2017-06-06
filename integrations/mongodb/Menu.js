@@ -14,8 +14,6 @@ const mongoose = require('mongoose');
   }
 
   function getTodayMenu() {
-    console.log('get today menu');
-
     return new Promise((resolve, reject) => {
       const todayFormattedDate = getTodayDate();
       Menu.findOne({ date: todayFormattedDate }, (error, menuStored) => {
@@ -30,8 +28,6 @@ const mongoose = require('mongoose');
   }
 
   function saveTodayMenu(menu) {
-    console.log('save today menu');
-
     return new Promise((resolve, reject) => {
       const todayFormattedDate = getTodayDate();
       Menu.create({ menu, date: todayFormattedDate }, (errorCreatingMenu) => {
@@ -39,105 +35,76 @@ const mongoose = require('mongoose');
           reject(errorCreatingMenu);
           return;
         }
-        console.log('menu', menu, 'date', todayFormattedDate);
         resolve();
       });
     });
   }
 
   function isValidSize(size) {
-    console.log('is valid size', size);
-
     return new Promise((resolve, reject) => {
-      const todayFormattedDate = getTodayDate();
-      Menu.findOne({ date: todayFormattedDate }, (error, menuFound) => {
-        if (menuFound == null) {
-          reject('ifood não abriu ainda.');
-          return;
-        }
+      getTodayMenu
+        .then((menuFound) => {
+          const menu = menuFound.menu;
+          const found = Object.keys(menu).some(key => key === size);
 
-        const menu = menuFound.menu;
-
-        const found = Object.keys(menu).some(key => key === size);
-
-        if (found) {
-          resolve(true);
-        } else {
-          reject('Tamanho inválido');
-        }
-      });
+          if (found) {
+            resolve(true);
+          } else {
+            reject('Tamanho inválido');
+          }
+        })
+        .catch(reject);
     });
   }
 
   function isValidGarnish(size, garnish) {
-    console.log('is valid garnish', size, garnish);
-
     return new Promise((resolve, reject) => {
-      const todayFormattedDate = getTodayDate();
-      Menu.findOne({ date: todayFormattedDate }, (error, menuFound) => {
-        if (menuFound == null) {
-          reject('ifood não abriu ainda.');
-          return;
-        }
+      getTodayMenu
+        .then((menuFound) => {
+          const menu = menuFound.menu;
+          const found = menu[size].garnish.some(element => element === garnish);
 
-        const menu = menuFound.menu;
-
-        const found = menu[size].garnish.some(element => element === garnish);
-
-        if (found) {
-          resolve(true);
-        } else {
-          reject('Guarnição inválida');
-        }
-      });
+          if (found) {
+            resolve(true);
+          } else {
+            reject('Guarnição inválida');
+          }
+        })
+        .catch(reject);
     });
   }
 
   function isValidSalad(size, salad) {
-    console.log('is valid salad', size, salad);
-
     return new Promise((resolve, reject) => {
-      const todayFormattedDate = getTodayDate();
-      Menu.findOne({ date: todayFormattedDate }, (error, menuFound) => {
-        if (error) {
-          reject('ifood não abriu ainda.');
-          return;
-        }
+      getTodayMenu
+        .then((menuFound) => {
+          const menu = menuFound.menu;
+          const found = menu[size].salad.some(element => element === salad);
 
-        const menu = menuFound.menu;
-
-        const found = menu[size].salad.some(element => element === salad);
-
-        if (found) {
-          resolve(true);
-        } else {
-          reject('Salada inválida');
-        }
-      });
+          if (found) {
+            resolve(true);
+          } else {
+            reject('Salada inválida');
+          }
+        })
+        .catch(reject);
     });
   }
 
   function isValidDish(size, dish) {
-    console.log('is valid dish', size, dish);
-
     return new Promise((resolve, reject) => {
-      const todayFormattedDate = getTodayDate();
-      Menu.findOne({ date: todayFormattedDate }, (error, menuFound) => {
-        if (error) {
-          reject('ifood não abriu ainda.');
-          return;
-        }
+      getTodayMenu
+        .then((menuFound) => {
+          const menu = menuFound.menu;
+          const found = menu[size].dish.some(element => element === dish);
 
-        const menu = menuFound.menu;
-
-        const found = menu[size].dish.some(element => element === dish);
-
-        if (found) {
-          resolve(true);
-        } else {
-          reject('Prato inválido');
-        }
-      });
+          if (found) {
+            resolve(true);
+          } else {
+            reject('Prato inválido');
+          }
+        })
+        .catch(reject);
     });
   }
 

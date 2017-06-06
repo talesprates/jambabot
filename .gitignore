@@ -133,6 +133,6 @@ nohup.out
 variables.js
 *.iml
 .idea/
-/nbproject/private/
+/nbproject
 
 integrations/gmail/credentials/*.json

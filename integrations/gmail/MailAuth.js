@@ -2,20 +2,17 @@
 const fs = require('fs-extra');
 const path = require('path');
 const readline = require('readline');
-
 const GoogleAuth = require('google-auth-library');
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 const TOKEN_DIR = path.join(__dirname, 'credentials');
 const TOKEN_PATH = path.join(TOKEN_DIR, 'gmail-credential.json');
 const CLIENT_SECRET_PATH = path.join(TOKEN_DIR, 'client_secret.json');
-
 const CLIENT_SECRET = require(CLIENT_SECRET_PATH);
 const activeCredentials = CLIENT_SECRET.installed;
 const clientSecret = activeCredentials.client_secret;
 const clientId = activeCredentials.client_id;
 const redirectUrl = activeCredentials.redirect_uris[0];
-
 
 module.exports = {
   authenticate
@@ -33,7 +30,6 @@ function authenticate() {
     .then(() => (oauth2Client));
 }
 
-
 function parseReadTokenToObject(readToken) {
   try {
     return JSON.parse(readToken);
@@ -42,12 +38,10 @@ function parseReadTokenToObject(readToken) {
   }
 }
 
-
 function assignTokenToOauth(token, oauth2Client) {
   oauth2Client.credentials = token;
   return oauth2Client;
 }
-
 
 function generateNewToken(oauth2Client) {
   const authUrl = oauth2Client.generateAuthUrl({
@@ -61,7 +55,6 @@ function generateNewToken(oauth2Client) {
           .then(inputToken => validateToken(inputToken, oauth2Client))
           .then(storeTokenToJsonFile);
 }
-
 
 function readTokenFromStdin() {
   const rl = readline.createInterface({
@@ -77,7 +70,6 @@ function readTokenFromStdin() {
   });
 }
 
-
 function validateToken(readToken, oauth2Client) {
   return new Promise((resolve, reject) => {
     oauth2Client.getToken(readToken, (err, validToken) => {
@@ -89,7 +81,6 @@ function validateToken(readToken, oauth2Client) {
     });
   });
 }
-
 
 function storeTokenToJsonFile(token) {
   return fs.writeJson(TOKEN_PATH, token)

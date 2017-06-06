@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const mongodb = require('./integrations/mongodb/');
 const ifood = require('./integrations/ifood');
 

@@ -1,4 +1,3 @@
-
 const protractorTaskConf = require('./protractor-task.conf');
 const runner = require('./runner');
 
@@ -6,7 +5,6 @@ module.exports = {
   pedir,
   cardapio
 };
-
 
 function pedir(...params) {
   return new Promise((resolve, reject) => {

@@ -9,9 +9,7 @@ const variables = require('../../variables');
 
 (() => {
   mongoose.Promise = global.Promise;
-  // mongoose.connect('mongodb://localhost/jambadb');
   mongoose.connect(variables.MONGO_CONNECTION_STR);
-
 
   module.exports = {
     isValidDish: Dish.isValidDish,

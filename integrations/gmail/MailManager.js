@@ -5,7 +5,6 @@ const HeadersEnum = require('./GmailMessageHeaderEnum');
 
 const gmail = google.gmail('v1');
 
-
 (() => {
   module.exports = {
     getMails,
@@ -39,7 +38,6 @@ const gmail = google.gmail('v1');
       });
     });
   }
-
 
   function fetchMessage(oauth2Client, message) {
     return new Promise((resolve, reject) => {

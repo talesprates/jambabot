@@ -1,4 +1,3 @@
-
 const GmailMessageHeaderEnum = {
   DELIVEREDTO: 0,
   RECEIVED: 1,
