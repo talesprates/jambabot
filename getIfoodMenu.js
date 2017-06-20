@@ -11,9 +11,14 @@ mongodb.getTodayMenu()
   ifood.cardapio()
     .then((cardapio) => {
       mongodb.saveTodayMenu(cardapio)
-        .then(() => console.log('menu stored with sucess'))
-        .catch(() => console.log('duplicate menu'));
-      process.exit(0);
+        .then(() => {
+          console.log('menu stored with sucess');
+          process.exit(1);
+        })
+        .catch(() => {
+          console.log('duplicate menu');
+          process.exit(0);
+        });
     })
     .catch(() => {
       console.log('failed to store the menu');
