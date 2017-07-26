@@ -3,14 +3,14 @@ const ifood = require('../integrations/ifood');
 
 (() => {
   module.exports = {
-    pattern: /^pede ae (minimini|mini|todasassaladas|executiva) de ([^,]*), ([^,]*), ([^,]*)(?:, (.*))?$/i,
+    pattern: /^pede ae (minimini|mini|todasassaladas|executiva) de ([^,]*), ([^,]*), ([^,]*), as ([^,]*)(?:, (.*))?$/i,
     handler: pedeAe,
-    description: '*silviao pede ae* : {size} de {dish}, {garnish}, {salad}[, {comment}] ',
-    channels: ['delicias-do-jamba', 'dev-delicias-do-jamba']
+    description: '*silviao pede ae* : {size} de {dish}, {garnish}, {salad}, as {user}[, {comment}] ',
+    channels: ['talito_do_jamba']
   };
 
 
-  function pedeAe(message, callback, size, dish, garnish, salad, comment) {
+  function pedeAe(message, callback, size, dish, garnish, salad, user, comment) {
     mongodb.isValidSize(size)
       .then(() => mongodb.isValidGarnish(size, garnish))
       .then(() => mongodb.isValidSalad(size, salad))
@@ -18,6 +18,9 @@ const ifood = require('../integrations/ifood');
       .then(runAutomatedOrder)
       .then(callback)
       .catch(callback);
+
+    runAutomatedOrder(message, callback, size, dish, garnish, salad, user, comment)
+      .then(callback);
 
 
     function runAutomatedOrder() {
@@ -30,10 +33,12 @@ const ifood = require('../integrations/ifood');
         salad,
         'garnish',
         garnish,
+        'user',
+        user,
         'comment',
         comment
       );
-      return ifood.pedir(message, size, dish, garnish, salad, comment);
+      return ifood.pedir(message, size, dish, garnish, salad, user, comment);
     }
   }
 })();

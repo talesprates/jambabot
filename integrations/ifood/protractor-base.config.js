@@ -92,7 +92,7 @@ function configChai() {
 function waitElementVisible(target) {
   const EC = protractor.ExpectedConditions;
   const elementTarget = getElement(target);
-  return browser.wait(EC.visibilityOf(elementTarget), 10000).then(() => elementTarget);
+  return browser.wait(EC.visibilityOf(elementTarget), 20000).then(() => elementTarget);
 }
 
 /**
@@ -102,7 +102,7 @@ function waitElementVisible(target) {
 function waitElementDisapear(target) {
   const EC = protractor.ExpectedConditions;
   const elementTarget = getElement(target);
-  return browser.wait(EC.not(EC.visibilityOf(elementTarget)), 10000).then(() => elementTarget);
+  return browser.wait(EC.not(EC.visibilityOf(elementTarget)), 20000).then(() => elementTarget);
 }
 
 /**

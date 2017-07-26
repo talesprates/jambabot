@@ -37,6 +37,6 @@ const mongodb = require('../integrations/mongodb');
     pattern: /^ifood(?: (.*))?$/,
     handler: ifood,
     description: '*silviao ifood [size]* : Gets today\'s ifood menu',
-    channels: ['delicias-do-jamba', 'dev-delicias-do-jamba']
+    channels: ['talito_do_jamba']
   };
 })();

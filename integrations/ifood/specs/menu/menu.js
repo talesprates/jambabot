@@ -5,8 +5,8 @@ describe('Get Today Menu', () => {
   const cardapio = {};
 
   after(() => {
-    MenuPage.buttons.nextTab.click();
-    waitElementVisible(MenuPage.fields.tab3);
+    // MenuPage.buttons.nextTab.click();
+    // waitElementVisible(MenuPage.fields.tab3);
 
     if (Object.keys(cardapio).length === 4) {
       process.send(cardapio);
@@ -51,8 +51,8 @@ describe('Get Today Menu', () => {
     }
 
     function extractMenuForSize(size) {
-      waitElementVisible(MenuPage.buttons.addDish).then(e => e.click());
-      waitElementVisible(MenuPage.fields.tab0);
+      waitElementVisible(MenuPage.buttons.addDish).then(e => e.click())
+      .then(() => {waitElementVisible(MenuPage.fields.tab0);
 
       $$(MenuPage.fields.tab0).each((element) => {
         element.getText().then(text => size.dish.push(text));
@@ -74,6 +74,7 @@ describe('Get Today Menu', () => {
         element.getText().then(text => size.salad.push(text));
         element.click();
       });
+    });
     }
   });
 });
