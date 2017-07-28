@@ -5,8 +5,8 @@ describe('Get Today Menu', () => {
   const cardapio = {};
 
   after(() => {
-    // MenuPage.buttons.nextTab.click();
-    // waitElementVisible(MenuPage.fields.tab3);
+    MenuPage.buttons.nextTab.click();
+    waitElementVisible(MenuPage.fields.tab3);
 
     if (Object.keys(cardapio).length === 4) {
       process.send(cardapio);
@@ -52,29 +52,31 @@ describe('Get Today Menu', () => {
 
     function extractMenuForSize(size) {
       waitElementVisible(MenuPage.buttons.addDish).then(e => e.click())
-      .then(() => {waitElementVisible(MenuPage.fields.tab0);
+      // this then is to force the execution of the code after clicking the addDish button.
+      .then(() => {
+        waitElementVisible(MenuPage.fields.tab0);
 
-      $$(MenuPage.fields.tab0).each((element) => {
-        element.getText().then(text => size.dish.push(text));
-        element.click();
+        $$(MenuPage.fields.tab0).each((element) => {
+          element.getText().then(text => size.dish.push(text));
+          element.click();
+        });
+
+        MenuPage.buttons.nextTab.click();
+        waitElementVisible(MenuPage.fields.tab1);
+
+        $$(MenuPage.fields.tab1).each((element) => {
+          element.getText().then(text => size.garnish.push(text));
+          element.click();
+        });
+
+        MenuPage.buttons.nextTab.click();
+        waitElementVisible(MenuPage.fields.tab2);
+
+        $$(MenuPage.fields.tab2).each((element) => {
+          element.getText().then(text => size.salad.push(text));
+          element.click();
+        });
       });
-
-      MenuPage.buttons.nextTab.click();
-      waitElementVisible(MenuPage.fields.tab1);
-
-      $$(MenuPage.fields.tab1).each((element) => {
-        element.getText().then(text => size.garnish.push(text));
-        element.click();
-      });
-
-      MenuPage.buttons.nextTab.click();
-      waitElementVisible(MenuPage.fields.tab2);
-
-      $$(MenuPage.fields.tab2).each((element) => {
-        element.getText().then(text => size.salad.push(text));
-        element.click();
-      });
-    });
     }
   });
 });
