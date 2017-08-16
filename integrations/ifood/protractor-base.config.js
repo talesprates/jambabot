@@ -1,7 +1,6 @@
 const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const phantomjs = require('phantomjs');
 const _ = require('lodash');
 
 const variables = require('../../variables');
@@ -45,8 +44,10 @@ function generateDefaultConfigs() {
     });
   } else {
     configs.multiCapabilities.push({
-      browserName: 'phantomjs',
-      'phantomjs.binary.path': phantomjs.path,
+      browserName: 'chrome',
+      chromeOptions: {
+        args: ['--headless', '--disable-gpu', '--window-size=800,600']
+      },
       count: 1
     });
   }
