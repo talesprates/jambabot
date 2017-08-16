@@ -1,7 +1,7 @@
 const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const phantomjs = require('phantomjs');
+const phantomjs = require('phantomjs-prebuilt');
 const _ = require('lodash');
 
 const variables = require('../../variables');
