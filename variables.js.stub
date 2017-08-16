@@ -2,13 +2,13 @@
 // This is a stub for it.
 
 module.exports = {
-  JAMBABOT_DEBUG: false,
-  JAMBABOT_DEBUG_URL: 'URL for development',
+  JAMBABOT_DEBUG: true,
+  JAMBABOT_DEBUG_URL: 'http://localhost:6001',
   JAMBABOT_PROD_URL: 'URL for production',
 
-  JAMBABOT_USER_TOKEN: 'URL for userbot',
+  JAMBABOT_USER_TOKEN: 'xoxb-138022693811-Kp0z5opMY0xa5Gavyaji4rR7',
 
-  JAMBABOT_DEBUG_TOKEN: 'Token for development',
+  JAMBABOT_DEBUG_TOKEN: 'xoxb-138022693811-Kp0z5opMY0xa5Gavyaji4rR7',
   JAMBABOT_PROD_TOKEN: 'Token for production',
 
   GOOGLE_API_KEY: 'Google API Key',
@@ -16,7 +16,6 @@ module.exports = {
 
   MONGO_CONNECTION_STR: 'mongodb://localhost/jambadb',
 
-  IFOOD_ACCOUNT: '',
-  IFOOD_PASSWORD: '',
-  IFOOD_ACCOUNTS_QTY: ''
+  GMAIL_ACCOUNT: 'fiaobot@gmai.com',
+  GMAIL_PASSWORD: 'Fi@o1234'
 };
