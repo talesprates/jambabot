@@ -2,6 +2,8 @@ const { merge } = require('lodash');
 
 const variables = require('../../variables');
 
+const path = require('path');
+
 module.exports = {
   protractorPedeAeConfig,
   protractorMenuConfig
@@ -11,7 +13,7 @@ let accountNumber = 0;
 
 function protractorPedeAeConfig(message, size, dish, garnish, salad, user, comment = '') {
   return baseTaskConfig({
-    configFile: './integrations/ifood/protractor-pedeAe.conf.js',
+    configFile: path.join(path.dirname(require.main.filename), '/integrations/ifood/protractor-pedeAe.conf.js'),
     args: {
       params: {
         order: {
@@ -36,7 +38,7 @@ function protractorPedeAeConfig(message, size, dish, garnish, salad, user, comme
 
 function protractorMenuConfig() {
   return baseTaskConfig({
-    configFile: './integrations/ifood/protractor-menu.conf.js'
+    configFile: path.join(path.dirname(require.main.filename), '/integrations/ifood/protractor-menu.conf.js')
   });
 }
 
